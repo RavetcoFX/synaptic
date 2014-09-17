@@ -171,8 +171,6 @@ void RPackageViewStatus::addPackage(RPackage *pkg)
 	    (flags & RPackage::FInstalled))
       str = _("Installed (local or obsolete)");
    else if (flags & RPackage::FInstalled) {
-      if (flags & RPackage::FOutdated)
-	 str = _("Installed (upgradable)");
    } else {
       if (flags & RPackage::FResidualConfig)
 	 str = _("Not installed (residual config)");
@@ -542,12 +540,6 @@ void RPackageViewFilter::makePresetFilters()
       registerFilter(filter);
    }
 #endif
-   filter = new RFilter();
-   filter->preset = true;
-   filter->status.setStatus(RStatusPackageFilter::UpstreamUpgradable);
-   filter->setName("Upgradable (upstream)"); _("Upgradable (upstream)");
-   registerFilter(filter);
-
    filter = new RFilter();
    filter->preset = true;
    filter->pattern.addPattern(RPatternPackageFilter::Component,
